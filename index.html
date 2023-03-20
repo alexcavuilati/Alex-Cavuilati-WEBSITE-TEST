@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My ChatGPT Page</title>
+  </head>
+  <body>
+    <p id="output"></p>
+
+    <script>
+      const chatGptCorpus = [
+        "ChatGPT is a language model developed by OpenAI.",
+        "It's designed to generate text based on patterns learned from large amounts of data.",
+        "It can answer questions and generate text on a wide range of topics."
+      ];
+
+      function isChatGptText(inputText) {
+        let similarity = 0;
+        for (let i = 0; i < chatGptCorpus.length; i += 1) {
+          const jaccardSimilarity = jaccard(inputText, chatGptCorpus[i]);
+          similarity = Math.max(similarity, jaccardSimilarity);
+        }
+        return similarity >= 0.5;
+      }
+
+      function jaccard(str1, str2) {
+        const set1 = new Set(str1.split(" "));
+        const set2 = new Set(str2.split(" "));
+        const intersection = new Set([...set1].filter(x => set2.has(x)));
+        return intersection.size / (set1.size + set2.size - intersection.size);
+      }
+
+      const inputText = "ChatGPT is a language model that generates text.";
+      const outputEl = document.getElementById("output");
+      outputEl.innerHTML = isChatGptText(inputText);
+    </script>
+  </body>
+</html>

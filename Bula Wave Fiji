@@ -1,0 +1,7 @@
+cd truthnet-repo
+git init
+git add -A
+git commit -m "feat: TruthNet prototype v0.2 (bias-resistant verification)"
+git branch -M main
+git remote add origin https://github.com/<YOUR_USERNAME>/truthnet.git
+git push -u origin main
